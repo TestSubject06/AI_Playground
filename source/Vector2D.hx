@@ -16,22 +16,22 @@ class Vector2D {
 	}
 	
 	public static function dot(a:Vector2D, b:Vector2D):Float {
-		return a.x * b.x + a.y + b.y;
+		return a.x * b.x + a.y * b.y;
 	}
 	
 	public static function cross(v:Vector2D):Vector2D {
 		return new Vector2D(v.y, -v.x);
 	}
 	
-	public static function add(a:Vector2D, b:Vector2D):Vector2D {
+	public static function addV(a:Vector2D, b:Vector2D):Vector2D {
 		return new Vector2D(a.x + b.x, a.y + b.y);
 	}
 	
-	public static function subtract(a:Vector2D, b:Vector2D):Vector2D {
+	public static function subtractV(a:Vector2D, b:Vector2D):Vector2D {
 		return new Vector2D(a.x - b.x, a.y - b.y);
 	}
 	
-	public static function scale(v:Vector2D, s:Float):Vector2D {
+	public static function scaleV(v:Vector2D, s:Float):Vector2D {
 		return new Vector2D(v.x * s, v.y * s);
 	}
 	
@@ -74,6 +74,17 @@ class Vector2D {
 		x -= v.x;
 		y -= v.y;
 		return this;
+	}
+	
+	public function truncate(s:Float):Vector2D {
+		if (lengthSquared() > s*s) {
+			normalize().scale(s);
+		}
+		return this;
+	}
+	
+	public function toString():String {
+		return x + ":" + y;
 	}
 	
 }
